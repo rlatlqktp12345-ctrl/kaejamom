@@ -12,9 +12,7 @@ STATIONS = {
 }
 
 def get_target_time():
-    # 현재 시간 기준 가장 최근 정각 시간 계산
     now = datetime.datetime.utcnow() + datetime.timedelta(hours=9)
-    # 1시간 전 데이터를 조회해야 기상청 서버에 데이터가 안정적으로 쌓여 있습니다.
     target = now - datetime.timedelta(hours=1)
     return target.strftime("%Y%m%d%H00")
 
@@ -30,7 +28,7 @@ def fetch_weather_data(stn_id):
     }
     
     try:
-        response = requests.get(url, params=params, timeout=10)
+        response = requests.get(url, params=params, timeout=20)
         text_data = response.text
         
         if "ERROR" in text_data or "Unauthorized" in text_data:
