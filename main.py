@@ -12,7 +12,8 @@ STATIONS = {
 }
 
 def get_target_time():
-    now = datetime.datetime.utcnow() + datetime.timedelta(hours=9)
+    # -1
+    now = datetime.datetime.utcnow() + datetime.timedelta(hours=9) - datetime.timedelta(hours=1)
     return now.strftime("%Y%m%d%H00")
 
 def fetch_weather_data(stn_id):
