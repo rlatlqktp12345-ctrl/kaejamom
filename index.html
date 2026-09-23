@@ -440,16 +440,12 @@
 
 <footer class="text-center py-4 text-white">
   <p class="mb-2">© 2026 KAE JAM OM. All rights reserved.</p>
-    <p class="mb-2">© 문의 → rlatlqktp12345@gmail.com </p>
+  <p class="mb-2">© 문의 → rlatlqktp12345@gmail.com</p>
   <p class="mb-0 text-white-50 small">
-  <span id="hit-count">...</span>
+    방문자 수: <span id="hit-count">...</span>
   </p>
 </footer>
 
-<!-- 1. 숫자가 들어갈 위치 (id="hit-count" 확인) -->
-<p>© ... | 방문자 수: <span id="hit-count">...</span></p>
-
-<!-- 2. 자바스크립트 코드 -->
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     fetch('https://api.counterapi.dev/v1/rlatlqktp12345-kaejamom/visits/up')
@@ -465,7 +461,6 @@
       });
   });
 </script>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
