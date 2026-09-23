@@ -13,8 +13,7 @@ STATIONS = {
 
 def get_target_time():
     now = datetime.datetime.utcnow() + datetime.timedelta(hours=9)
-    target = now - datetime.timedelta(hours=1)
-    return target.strftime("%Y%m%d%H00")
+    return now.strftime("%Y%m%d%H00")
 
 def fetch_weather_data(stn_id):
     url = "https://apihub.kma.go.kr/api/typ01/url/kma_sfctm2.php"
