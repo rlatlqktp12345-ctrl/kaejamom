@@ -447,13 +447,15 @@
 </footer>
 
 <script>
-  fetch('https://api.hitvis.com/hit?url=' + encodeURIComponent(window.location.href))
+  fetch('https://api.counterapi.dev/v1/rlatlqktp12345-kaejamom/visits/up')
     .then(res => res.json())
     .then(data => {
-      document.getElementById('hit-count').innerText = data.hits || 1;
+      if (data && data.count) {
+        document.getElementById('hit-count').innerText = data.count.toLocaleString();
+      }
     })
-    .catch(() => {
-      document.getElementById('hit-count').innerText = '1';
+    .catch(err => {
+      console.error('카운터 에러:', err);
     });
 </script>
 
