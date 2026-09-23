@@ -494,32 +494,33 @@
         })
         .then(data => {
             // 신항 날씨 업데이트
-            if (data.신항 && !data.신항.error) {
-                const s = data.신항;
-              const rainS = (s['강수량_mm'] !== null && s['강수량_mm'] >= 0.1) ? s['강수량_mm'] + ' mm' : '0 mm';
-                document.getElementById('sinhang-weather').innerHTML = 
-                    `🌡️ 기온: <strong>${s['기온_C'] !== null ? s['기온_C'] + '°C' : '정보 없음'}</strong> | ` + 
-                    `💧 습도: <strong>${s['습도_%'] !== null ? s['습도_%'] + '%' : '정보 없음'}</strong><br>` + 
-                    `💨 풍속: <strong>${s['풍속_ms'] !== null ? s['풍속_ms'] + ' m/s' : '정보 없음'}</strong> | ` + 
-                  `🌧️ 강수량: <strong>${s['강수량_mm'] !== null ? s['강수량_mm'] + ' mm' : '0 mm'}</strong><br>` +
-                   `<span class="text-white-50">(${formatTime(s.관측시각)})</span>`;
-            } else {
-                document.getElementById('sinhang-weather').innerText = "신항 데이터를 불러오지 못했습니다.";
-            }
+         // 신항 날씨 업데이트
+        if (data.신항 && !data.신항.error) {
+            const s = data.신항;
+            const rainS = (s['강수량_mm'] !== null && s['강수량_mm'] >= 0.1) ? s['강수량_mm'] + ' mm' : '0 mm';
+            document.getElementById('sinhang-weather').innerHTML = 
+                `🌡️ 기온: <strong>${s['기온_C'] !== null ? s['기온_C'] + '°C' : '정보 없음'}</strong> | ` + 
+                `💧 습도: <strong>${s['습도_%'] !== null ? s['습도_%'] + '%' : '정보 없음'}</strong><br>` + 
+                `💨 풍속: <strong>${s['풍속_ms'] !== null ? s['풍속_ms'] + ' m/s' : '정보 없음'}</strong> | ` + 
+                `🌧️ 강수량: <strong>${rainS}</strong><br>` +
+                `<span class="text-white-50">(${formatTime(s.관측시각)})</span>`;
+        } else {
+            document.getElementById('sinhang-weather').innerText = "신항 데이터를 불러오지 못했습니다.";
+        }
 
-            // 북항 날씨 업데이트
-            if (data.북항 && !data.북항.error) {
-                const b = data.북항;
-              const rainB = (b['강수량_mm'] !== null && b['강수량_mm'] >= 0.1) ? b['강수량_mm'] + ' mm' : '0 mm';
-                document.getElementById('bukhang-weather').innerHTML = 
-                    `🌡️ 기온: <strong>${b['기온_C'] !== null ? b['기온_C'] + '°C' : '정보 없음'}</strong> | ` + 
-                    `💧 습도: <strong>${b['습도_%'] !== null ? b['습도_%'] + '%' : '정보 없음'}</strong><br>` + 
-                    `💨 풍속: <strong>${b['풍속_ms'] !== null ? b['풍속_ms'] + ' m/s' : '정보 없음'}</strong> | ` + 
-                  `🌧️ 강수량: <strong>${b['강수량_mm'] !== null ? b['강수량_mm'] + ' mm' : '0 mm'}</strong><br>` +
-                   `<span class="text-white-50">(${formatTime(b.관측시각)})</span>`;
-            } else {
-                document.getElementById('bukhang-weather').innerText = "북항 데이터를 불러오지 못했습니다.";
-            }
+        // 북항 날씨 업데이트
+        if (data.북항 && !data.북항.error) {
+            const b = data.북항;
+            const rainB = (b['강수량_mm'] !== null && b['강수량_mm'] >= 0.1) ? b['강수량_mm'] + ' mm' : '0 mm';
+            document.getElementById('bukhang-weather').innerHTML = 
+                `🌡️ 기온: <strong>${b['기온_C'] !== null ? b['기온_C'] + '°C' : '정보 없음'}</strong> | ` + 
+                `💧 습도: <strong>${b['습도_%'] !== null ? b['습도_%'] + '%' : '정보 없음'}</strong><br>` + 
+                `💨 풍속: <strong>${b['풍속_ms'] !== null ? b['풍속_ms'] + ' m/s' : '정보 없음'}</strong> | ` + 
+                `🌧️ 강수량: <strong>${rainB}</strong><br>` +
+                `<span class="text-white-50">(${formatTime(b.관측시각)})</span>`;
+        } else {
+            document.getElementById('bukhang-weather').innerText = "북항 데이터를 불러오지 못했습니다.";
+        }
         })
         .catch(error => {
             console.error('날씨 데이터 로드 실패:', error);
