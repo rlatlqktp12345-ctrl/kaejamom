@@ -500,6 +500,7 @@
                     `🌡️ 기온: <strong>${s['기온_C'] !== null ? s['기온_C'] + '°C' : '정보 없음'}</strong> | ` + 
                     `💧 습도: <strong>${s['습도_%'] !== null ? s['습도_%'] + '%' : '정보 없음'}</strong><br>` + 
                     `💨 풍속: <strong>${s['풍속_ms'] !== null ? s['풍속_ms'] + ' m/s' : '정보 없음'}</strong> | ` + 
+                  `🌧️ 강수량: <strong>${s['강수량_mm'] !== null ? s['강수량_mm'] + ' mm' : '0 mm'}</strong><br>` +
                    `<span class="text-white-50">(${formatTime(s.관측시각)})</span>`;
             } else {
                 document.getElementById('sinhang-weather').innerText = "신항 데이터를 불러오지 못했습니다.";
@@ -512,6 +513,7 @@
                     `🌡️ 기온: <strong>${b['기온_C'] !== null ? b['기온_C'] + '°C' : '정보 없음'}</strong> | ` + 
                     `💧 습도: <strong>${b['습도_%'] !== null ? b['습도_%'] + '%' : '정보 없음'}</strong><br>` + 
                     `💨 풍속: <strong>${b['풍속_ms'] !== null ? b['풍속_ms'] + ' m/s' : '정보 없음'}</strong> | ` + 
+                  `🌧️ 강수량: <strong>${b['강수량_mm'] !== null ? b['강수량_mm'] + ' mm' : '0 mm'}</strong><br>` +
                    `<span class="text-white-50">(${formatTime(b.관측시각)})</span>`;
             } else {
                 document.getElementById('bukhang-weather').innerText = "북항 데이터를 불러오지 못했습니다.";
