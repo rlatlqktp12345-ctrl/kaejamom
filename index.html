@@ -441,14 +441,71 @@
   </div>
 </div>
 
-<footer class="text-center py-4 text-white">
-  <p class="mb-2">© 2026 KAE JAM OM. All rights reserved.</p>
-  <p class="mb-2">© 문의 → rlatlqktp12345@gmail.com</p>
-  <p class="mb-0 text-white-50 small">
-    <a href="https://hits.sh/rlatlqktp12345-ctrl.github.io/kaejamom/"><img alt="Hits" src="https://hits.sh/rlatlqktp12345-ctrl.github.io/kaejamom.svg?style=flat-square&label=ship&color=555555"/></a>
-  </p>
+<footer class="text-center py-4 text-white bg-dark">
+    <div class="container">
+        <!-- 실시간 날씨 정보 표시 영역 -->
+        <div class="row mb-4 justify-content-center text-start">
+            <div class="col-md-5 mb-3 mb-md-0 bg-secondary bg-opacity-25 p-3 rounded-3 border border-secondary">
+                <h6 class="fw-bold text-info mb-2">⚓ 신항 실시간 날씨</h6>
+                <div id="sinhang-weather" class="small text-light">
+                    데이터를 불러오는 중...
+                </div>
+            </div>
+            <div class="col-md-5 bg-secondary bg-opacity-25 p-3 rounded-3 border border-secondary">
+                <h6 class="fw-bold text-success mb-2">⚓ 북항 실시간 날씨</h6>
+                <div id="bukhang-weather" class="small text-light">
+                    데이터를 불러오는 중...
+                </div>
+            </div>
+        </div>
+
+        <hr class="border-secondary my-3">
+
+        <p class="mb-2">© 2026 KAE JAM OM. All rights reserved.</p>
+        <p class="mb-2">© 문의 → rlatlqktp12345@gmail.com</p>
+        <p class="mb-0 text-white-50 small">
+            <a href="https://hits.sh/rlatlqktp12345-ctrl.github.io/kaejamom/"><img alt="Hits" src="https://hits.sh/rlatlqktp12345-ctrl.github.io/kaejamom.svg?style=flat-square&label=ship&color=555555"/></a>
+        </p>
+    </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        fetch('data/weather.json')
+            .then(response => response.json())
+            .then(data => {
+                // 신항 날씨 업데이트
+                if (data.신항 && !data.신항.error) {
+                    const s = data.신항;
+                    document.getElementById('sinhang-weather').innerHTML = 
+                        `🌡️ 기온: <strong>${s['기온_C'] !== null ? s['기온_C'] + '°C' : '정보 없음'}</strong> | ` +
+                        `💧 습도: <strong>${s['습도_%'] !== null ? s['습도_%'] + '%' : '정보 없음'}</strong><br>` +
+                        `💨 풍속: <strong>${s['풍속_ms'] !== null ? s['풍속_ms'] + ' m/s' : '정보 없음'}</strong> | ` +
+                        `<span class="text-white-50">(${s.관측시각 || ''})</span>`;
+                } else {
+                    document.getElementById('sinhang-weather').innerText = "신항 데이터를 불러오지 못했습니다.";
+                }
+
+                // 북항 날씨 업데이트
+                if (data.북항 && !data.북항.error) {
+                    const b = data.북항;
+                    document.getElementById('bukhang-weather').innerHTML = 
+                        `🌡️ 기온: <strong>${b['기온_C'] !== null ? b['기온_C'] + '°C' : '정보 없음'}</strong> | ` +
+                        `💧 습도: <strong>${b['습도_%'] !== null ? b['습도_%'] + '%' : '정보 없음'}</strong><br>` +
+                        `💨 풍속: <strong>${b['풍속_ms'] !== null ? b['풍속_ms'] + ' m/s' : '정보 없음'}</strong> | ` +
+                        `<span class="text-white-50">(${b.관측시각 || ''})</span>`;
+                } else {
+                    document.getElementById('bukhang-weather').innerText = "북항 데이터를 불러오지 못했습니다.";
+                }
+            })
+            .catch(error => {
+                console.error('날씨 데이터 로드 실패:', error);
+                document.getElementById('sinhang-weather').innerText = "데이터 로드 오류";
+                document.getElementById('bukhang-weather').innerText = "데이터 로드 오류";
+            });
+    });
+</script>
 </body>
+  
 </html>
