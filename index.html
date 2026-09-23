@@ -446,17 +446,24 @@
   </p>
 </footer>
 
+<!-- 1. 숫자가 들어갈 위치 (id="hit-count" 확인) -->
+<p>© ... | 방문자 수: <span id="hit-count">...</span></p>
+
+<!-- 2. 자바스크립트 코드 -->
 <script>
-  fetch('https://api.counterapi.dev/v1/rlatlqktp12345-kaejamom/visits/up')
-    .then(res => res.json())
-    .then(data => {
-      if (data && data.count) {
-        document.getElementById('hit-count').innerText = data.count.toLocaleString();
-      }
-    })
-    .catch(err => {
-      console.error('카운터 에러:', err);
-    });
+  document.addEventListener("DOMContentLoaded", () => {
+    fetch('https://api.counterapi.dev/v1/rlatlqktp12345-kaejamom/visits/up')
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.count) {
+          document.getElementById('hit-count').innerText = data.count.toLocaleString();
+        }
+      })
+      .catch(err => {
+        console.error('카운터 에러:', err);
+        document.getElementById('hit-count').innerText = '1';
+      });
+  });
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
