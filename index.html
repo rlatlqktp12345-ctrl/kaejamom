@@ -442,25 +442,10 @@
   <p class="mb-2">© 2026 KAE JAM OM. All rights reserved.</p>
   <p class="mb-2">© 문의 → rlatlqktp12345@gmail.com</p>
   <p class="mb-0 text-white-50 small">
-    방문자 수: <span id="hit-count">...</span>
+    <a href="https://hits.sh/rlatlqktp12345-ctrl.github.io/kaejamom/"><img alt="Hits" src="https://hits.sh/rlatlqktp12345-ctrl.github.io/kaejamom.svg?style=flat-square&label=ship&color=555555"/></a>
   </p>
 </footer>
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    fetch('https://api.counterapi.dev/v1/rlatlqktp12345-kaejamom/visits/up')
-      .then(res => res.json())
-      .then(data => {
-        if (data && data.count) {
-          document.getElementById('hit-count').innerText = data.count.toLocaleString();
-        }
-      })
-      .catch(err => {
-        console.error('카운터 에러:', err);
-        document.getElementById('hit-count').innerText = '1';
-      });
-  });
-</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
