@@ -1,13 +1,13 @@
 {
     "북항": {
-        "관측시각": "202609240000",
-        "기온_C": 21.1,
-        "습도_%": 69.0,
-        "풍향_deg": 32.0,
-        "풍속_ms": 1.2,
-        "강수량_mm": -9.0
+        "error": "HTTPSConnectionPool(host='apihub.kma.go.kr', port=443): Read timed out. (read timeout=20)"
     },
     "신항": {
-        "error": "HTTPSConnectionPool(host='apihub.kma.go.kr', port=443): Read timed out. (read timeout=20)"
+        "관측시각": "202609240000",
+        "기온_C": 21.2,
+        "습도_%": 76.0,
+        "풍향_deg": 0.0,
+        "풍속_ms": 0.2,
+        "강수량_mm": -9.0
     }
 }
