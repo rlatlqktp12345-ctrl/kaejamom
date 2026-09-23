@@ -5,20 +5,22 @@ import requests
 
 AUTH_KEY = os.environ.get("KMA_AUTH_KEY")
 
-# 부산 항만 관측소 (북항: 대청동 159, 신항 인근: 가덕도 등)
+# 부산 지역 대표 관측소 번호 (북항: 부산(159), 신항 인근: 가덕도 등)
 STATIONS = {
     "북항": "159",
     "신항": "255"
 }
 
-def get_current_kst_time():
+def get_target_time():
+    # 현재 시간 기준 가장 최근 정각 시간 계산
     now = datetime.datetime.utcnow() + datetime.timedelta(hours=9)
-    return now.strftime("%Y%m%d%H00")
+    # 1시간 전 데이터를 조회해야 기상청 서버에 데이터가 안정적으로 쌓여 있습니다.
+    target = now - datetime.timedelta(hours=1)
+    return target.strftime("%Y%m%d%H00")
 
 def fetch_weather_data(stn_id):
-    # API허브에서 안정적으로 데이터를 받아오는 종관기상관측(ASOS) 시간자료 URL
     url = "https://apihub.kma.go.kr/api/typ01/url/kma_sfctm2.php"
-    tm = get_current_kst_time()
+    tm = get_target_time()
     
     params = {
         'tm': tm,
@@ -31,24 +33,23 @@ def fetch_weather_data(stn_id):
         response = requests.get(url, params=params, timeout=10)
         text_data = response.text
         
-        # 데이터가 정상이 아닐 경우 예외 처리
         if "ERROR" in text_data or "Unauthorized" in text_data:
             return {"error": "API 인증 또는 요청 오류", "raw": text_data}
             
         lines = text_data.strip().split('\n')
         for line in lines:
             if not line.startswith('#') and line.strip():
-                parts = [p.strip() for p in line.split(',')]
-                if len(parts) > 15:
+                parts = [p.strip() for p in line.split() if p.strip()]
+                if len(parts) >= 16:
                     return {
                         "관측시각": parts[0],
-                        "기온_C": float(parts[11]) if parts[11] else None,
-                        "습도_%": float(parts[13]) if parts[13] else None,
-                        "풍향_deg": float(parts[2]) if parts[2] else None,
-                        "풍속_ms": float(parts[3]) if parts[3] else None,
-                        "강수량_mm": float(parts[15]) if parts[15] else None
+                        "기온_C": float(parts[11]) if parts[11] != "-9" else None,
+                        "습도_%": float(parts[13]) if parts[13] != "-9" else None,
+                        "풍향_deg": float(parts[2]) if parts[2] != "-9" else None,
+                        "풍속_ms": float(parts[3]) if parts[3] != "-9" else None,
+                        "강수량_mm": float(parts[15]) if parts[15] != "-9" else None
                     }
-        return {"error": "데이터 행을 찾지 못했습니다.", "raw": text_data}
+        return {"error": "데이터 행을 찾지 못했습니다.", "raw": text_data[:200]}
     except Exception as e:
         return {"error": str(e)}
 
