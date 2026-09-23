@@ -4,7 +4,7 @@ import datetime
 import requests
 
 
-AUTH_KEY = os.environ.get("6PKhgzMkSiSyoYMzJJokTA")
+AUTH_KEY = os.environ.get("KMA_AUTH_KEY")
 
 # 부산 항만 관측소 지점번호 (북항: 대청동 159, 신항: 가덕도 255)
 STATIONS = {
