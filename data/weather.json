@@ -1,8 +1,8 @@
 {
     "북항": {
-        "error": "HTTPSConnectionPool(host='apihub.kma.go.kr', port=443): Max retries exceeded with url: /api/typ01/url/kma_sfctm2.php?tm=202609242200&stn=159&help=0&authKey=6PKhgzMkSiSyoYMzJJokTA (Caused by ConnectTimeoutError(<HTTPSConnection(host='apihub.kma.go.kr', port=443) at 0x7f5c79868c40>, 'Connection to apihub.kma.go.kr timed out. (connect timeout=20)'))"
+        "error": "HTTPSConnectionPool(host='apihub.kma.go.kr', port=443): Read timed out. (read timeout=20)"
     },
     "신항": {
-        "error": "HTTPSConnectionPool(host='apihub.kma.go.kr', port=443): Max retries exceeded with url: /api/typ01/url/kma_sfctm2.php?tm=202609242200&stn=255&help=0&authKey=6PKhgzMkSiSyoYMzJJokTA (Caused by ConnectTimeoutError(<HTTPSConnection(host='apihub.kma.go.kr', port=443) at 0x7f5c798695d0>, 'Connection to apihub.kma.go.kr timed out. (connect timeout=20)'))"
+        "error": "HTTPSConnectionPool(host='apihub.kma.go.kr', port=443): Read timed out. (read timeout=20)"
     }
 }
