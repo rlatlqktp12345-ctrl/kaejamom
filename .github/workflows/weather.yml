@@ -2,9 +2,9 @@ name: Collect Weather Data
 
 on:
   schedule:
-    # 25분, 50분
-    - cron: '0,25,50 * * * *'
-  workflow_dispatch: # 수동 실행 버튼 활성화
+    # 매일 한국 시간 기준 아침 9시(UTC 기준 0시)에 실행 예시
+    - cron: '0 0 * * *'
+  workflow_dispatch: # 수동 실행 버튼 유지
 jobs:
   run-script:
     runs-on: ubuntu-latest
