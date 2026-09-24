@@ -203,23 +203,53 @@
     font-weight: bold;
     box-shadow: 0 5px 15px rgba(13, 202, 240, 0.3);
 }
-.upmu-section .terminal-card {
-    border: 1px solid #b6d4fe;
-}
-.upmu-section .terminal-card:hover {
-    border-color: #0dcaf0;
-    box-shadow: 0 8px 20px rgba(13, 202, 240, 0.2);
-}
-.upmu-section .btn-primary {
-    background-color: #0dcaf0;
-    border-color: #0dcaf0;
-    color: #000; /* 글자색을 어둡게 하여 가독성 높임 */
-}
-.upmu-section .btn-primary:hover {
-    background-color: #31d2f2;
-    border-color: #25cff2;
-}
+.upmu-section {
+        position: relative;
+        margin-top: 70px;
+        border: 3px solid #0dcaf0 !important;
+        border-radius: 20px;
+        background: linear-gradient(180deg, #e3f2fd 0%, #ffffff 100%) !important;
+        box-shadow: 0 10px 30px rgba(13, 202, 240, 0.15);
     }
+    .upmu-section::before {
+        content: "";
+        position: absolute;
+        top: -3px;
+        left: 10%;
+        right: 10%;
+        height: 6px;
+        background: #0dcaf0;
+        border-radius: 0 0 10px 10px;
+    }
+    .upmu-title {
+        display: inline-block;
+        padding: 8px 30px;
+        margin-top: -65px;
+        margin-bottom: 10px;
+        background: #0dcaf0 !important;
+        color: white !important;
+        border-radius: 30px;
+        font-size: 1.8rem;
+        font-weight: bold;
+        box-shadow: 0 5px 15px rgba(13, 202, 240, 0.3);
+    }
+    .upmu-section .terminal-card {
+        border: 1px solid #b6d4fe;
+    }
+    .upmu-section .terminal-card:hover {
+        border-color: #0dcaf0;
+        box-shadow: 0 8px 20px rgba(13, 202, 240, 0.2);
+    }
+    .upmu-section .btn-primary {
+        background-color: #0dcaf0;
+        border-color: #0dcaf0;
+        color: #000;
+    }
+    .upmu-section .btn-primary:hover {
+        background-color: #31d2f2;
+        border-color: #25cff2;
+    }
+    
   </style>
 </head>
 <body>
@@ -491,7 +521,7 @@
     </div>
   </div>
    <div class="content-card text-center upmu-section">
-    <h2 class="bukhang-title">업무</h2>
+  <h2 class="upmu-title">업무</h2>
       <div class="col-md-4">
         <div class="card h-100 terminal-card">
           <div class="card-body">
