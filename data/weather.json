@@ -1,8 +1,18 @@
 {
     "북항": {
-        "error": "HTTPSConnectionPool(host='apihub.kma.go.kr', port=443): Max retries exceeded with url: /api/typ01/url/kma_sfctm2.php?tm=202609241100&stn=159&help=0&authKey=6PKhgzMkSiSyoYMzJJokTA (Caused by ConnectTimeoutError(<HTTPSConnection(host='apihub.kma.go.kr', port=443) at 0x7f8dcf630c40>, 'Connection to apihub.kma.go.kr timed out. (connect timeout=20)'))"
+        "관측시각": "202609241200",
+        "기온_C": 29.6,
+        "습도_%": 49.0,
+        "풍향_deg": 23.0,
+        "풍속_ms": 3.0,
+        "강수량_mm": -9.0
     },
     "신항": {
-        "error": "HTTPSConnectionPool(host='apihub.kma.go.kr', port=443): Max retries exceeded with url: /api/typ01/url/kma_sfctm2.php?tm=202609241100&stn=255&help=0&authKey=6PKhgzMkSiSyoYMzJJokTA (Caused by ConnectTimeoutError(<HTTPSConnection(host='apihub.kma.go.kr', port=443) at 0x7f8dcf6315d0>, 'Connection to apihub.kma.go.kr timed out. (connect timeout=20)'))"
+        "관측시각": "202609241200",
+        "기온_C": 27.5,
+        "습도_%": 55.0,
+        "풍향_deg": 36.0,
+        "풍속_ms": 1.3,
+        "강수량_mm": -9.0
     }
 }
