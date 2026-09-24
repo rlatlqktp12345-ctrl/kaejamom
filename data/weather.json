@@ -8,6 +8,11 @@
         "강수량_mm": -9.0
     },
     "신항": {
-        "error": "HTTPSConnectionPool(host='apihub.kma.go.kr', port=443): Read timed out. (read timeout=20)"
+        "관측시각": "202609250100",
+        "기온_C": 23.0,
+        "습도_%": 70.0,
+        "풍향_deg": 25.0,
+        "풍속_ms": 0.7,
+        "강수량_mm": 0.0
     }
 }
