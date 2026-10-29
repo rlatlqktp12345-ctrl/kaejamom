@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>선사별 작업 공정 및 특이사항</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-color: #e1e8ed;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--primary-color);
+            font-size: 1.6rem;
+        }
+
+        /* 네비게이션 버튼 그룹 */
+        .nav-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 30px;
+            position: sticky;
+            top: 15px;
+            z-index: 100;
+            background: rgba(248, 249, 250, 0.9);
+            padding: 10px;
+            backdrop-filter: blur(5px);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .nav-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            text-decoration: none;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* 카드 레이아웃 */
+        .card-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .carrier-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            scroll-margin-top: 90px; /* 앵커 이동 시 상단 여백 확보 */
+            transition: box-shadow 0.2s;
+        }
+
+        .carrier-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .carrier-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 12px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 6px;
+        }
+
+        .process-steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .step-badge {
+            background-color: #f1f5f9;
+            color: #475569;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid #cbd5e1;
+        }
+
+        .step-badge.highlight {
+            background-color: #eff6ff;
+            color: #1d4ed8;
+            border-color: #bfdbfe;
+            font-weight: 600;
+        }
+
+        .step-arrow {
+            color: #94a3b8;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 600px) {
+            .nav-buttons {
+                gap: 5px;
+            }
+            .nav-btn {
+                padding: 6px 10px;
+                font-size: 0.8rem;
+            }
+            .carrier-name {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>선사별 검수 공정 가이드</h1>
+
+    <!-- 선사 바로가기 버튼 영역 (id 기반 이동) -->
+    <div class="nav-buttons">
+        <a href="#mol-one" class="nav-btn">MOL 외 5개사</a>
+        <a href="#wanhai-eas" class="nav-btn">WAN HAI·EAS</a>
+        <a href="#msc" class="nav-btn">MSC</a>
+        <a href="#maersk" class="nav-btn">MAERSK</a>
+        <a href="#cmacgm" class="nav-btn">CMA CGM(APL)</a>
+        <a href="#cnc" class="nav-btn">CNC</a>
+        <a href="#zim" class="nav-btn">ZIM</a>
+        <a href="#cosco" class="nav-btn">COSCO</a>
+    </div>
+
+    <!-- 내용 카드 영역 -->
+    <div class="card-list">
+        
+        <!-- MOL, TSL, EVER, HMM, OOCL, ONE -->
+        <div id="mol-one" class="carrier-card">
+            <div class="carrier-name">MOL, TSL, EVER, HMM, OOCL, ONE</div>
+            <div class="process-steps">
+                <span class="step-badge highlight">COMMENCED (CONT'R DIS' 기준)</span>
+                <span class="step-arrow">→</span>
+                <span class="step-badge">COMPLETED</span>
+                <span class="step-arrow">→</span>
+                <span class="step-badge">GANG KNOCK OFF</span>
+            </div>
+        </div>
+
+        <!-- WAN HAI, EAS -->
+        <div id="wanhai-eas" class="carrier-card">
+            <div class="carrier-name">WAN HAI, EAS</div>
+            <div class="process-steps">
+                <span class="step-badge">Time Keeper 없음</span>
+                <span class="step-arrow">/</span>
+                <span class="step-badge highlight">HOLD LOAD: 문짝 방향 전부 맞추기</span>
+            </div>
+        </div>
+
+        <!-- MSC -->
+        <div id="msc" class="carrier-card">
+            <div class="carrier-name">MSC</div>
+            <div class="process-steps">
+                <span class="step-badge highlight">COMMENCED (CONT'R DIS' 기준)</span>
+                <span class="step-arrow">→</span>
+                <span class="step-badge">GEAR BOX</span>
+                <span class="step-arrow">→</span>
+                <span class="step-badge">HATCH COVER 확인</span>
+                <span class="step-arrow">→</span>
+                <span class="step-badge highlight">COMPLETED (GEAR BOX LOAD' 확인)</span>
+                <span class="step-arrow">→</span>
+                <span class="step-badge">GANG KNOCK OFF</span>
+            </div>
+        </div>
+
+        <!-- MAERSK -->
+        <div id="maersk" class="carrier-card">
+            <div class="carrier-name">MAERSK</div>
+            <div class="process-steps">
+                <span class="step-badge highlight">COMMENCED (CONT'R DIS' 기준)</span>
+                <span class="step-arrow">→</span>
+                <span class="step-badge">GEAR BOX</span>
+                <span class="step-arrow">→</span>
+                <span class="step-badge">HATCH COVER 확인</span>
+                <span class="step-arrow">→</span>
+                <span class="step-badge highlight">OOG 사진촬영</span>
+                <span class="step-arrow">→</span>
+                <span class="step-badge highlight">COMPLETED (GEAR BOX LOAD' 확인)</span>
+                <span class="step-arrow">→</span>
+                <span class="step-badge">GANG KNOCK OFF</span>
+            </div>
+        </div>
+
+        <!-- CMA CGM(APL) -->
+        <div id="cmacgm" class="carrier-card">
+            <div class="carrier-name">CMA CGM (APL)</div>
+            <div class="process-steps">
+                <span class="step-badge highlight">COMMENCED (GEAR BOX DIS' 기준)</span>
+                <span class="step-arrow">→</span>
+                <span class="step-badge">HATCH COVER 확인</span>
+                <span class="step-arrow">→</span>
+                <span class="step-badge">GEAR BOX LOAD 확인</span>
+                <span class="step-arrow">→</span>
+                <span class="step-badge highlight">OOG 사진 촬영</span>
+                <span class="step-arrow">→</span>
+                <span class="step-badge highlight">COMPLETED (GEAR BOX LOAD' 확인)</span>
+                <span class="step-arrow">→</span>
+                <span class="step-badge">GANG KNOCK OFF</span>
+            </div>
+        </div>
+
+        <!-- CNC -->
+        <div id="cnc" class="carrier-card">
+            <div class="carrier-name">CNC</div>
+            <div class="process-steps">
+                <span class="step-badge highlight">COMMENCED (CONT'R DIS' 기준)</span>
+                <span class="step-arrow">→</span>
+                <span class="step-badge">HATCH COVER 확인</span>
+                <span class="step-arrow">→</span>
+                <span class="step-badge highlight">COMPLETED (GEAR BOX LOAD' 확인)</span>
+                <span class="step-arrow">→</span>
+                <span class="step-badge">GANG KNOCK OFF</span>
+            </div>
+        </div>
+
+        <!-- ZIM -->
+        <div id="zim" class="carrier-card">
+            <div class="carrier-name">ZIM</div>
+            <div class="process-steps">
+                <span class="step-badge highlight">COMMENCED (CONT'R DIS' 기준)</span>
+                <span class="step-arrow">→</span>
+                <span class="step-badge">HATCH COVER 확인</span>
+                <span class="step-arrow">→</span>
+                <span class="step-badge highlight">COMPLETED (GEAR BOX LOAD' 확인)</span>
+                <span class="step-arrow">→</span>
+                <span class="step-badge">GANG KNOCK OFF</span>
+            </div>
+        </div>
+
+        <!-- COSCO -->
+        <div id="cosco" class="carrier-card">
+            <div class="carrier-name">COSCO</div>
+            <div class="process-steps">
+                <span class="step-badge highlight">COMMENCED (CONT'R DIS' 기준)</span>
+                <span class="step-arrow">→</span>
+                <span class="step-badge">DG 통합 가능 (수기 가능, UN없음 가능)</span>
+                <span class="step-arrow">→</span>
+                <span class="step-badge">OOG 사이즈 다를 때 촬영</span>
+                <span class="step-arrow">→</span>
+                <span class="step-badge highlight">COMPLETED (GEAR BOX LOAD' 확인)</span>
+                <span class="step-arrow">→</span>
+                <span class="step-badge">GANG KNOCK OFF</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
