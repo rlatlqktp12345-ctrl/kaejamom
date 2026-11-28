@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>선박 기록부</title>
+<style>
+  :root {
+    --bg: #f4f6f9; --card: #fff; --line: #e2e6ec; --text: #1d2430;
+    --muted: #6b7686; --accent: #1f5fbf; --accent-soft: #e8f0fc; --danger: #c93a3a;
+    --mark: #ffe58a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    background: var(--bg); color: var(--text); font-size: 15px;
+  }
+  .sticky { position: sticky; top: 0; z-index: 10; }
+  nav {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    background: #16233a; padding: 0 16px; height: 50px;
+  }
+  nav .brand { color: #fff; font-weight: 700; font-size: 16px; text-decoration: none; }
+  nav .links { display: flex; gap: 4px; }
+  nav .links a {
+    color: #c9d4e6; text-decoration: none; font-size: 14px;
+    padding: 7px 12px; border-radius: 6px;
+  }
+  nav .links a:hover { background: rgba(255,255,255,.1); color: #fff; }
+  header {
+    background: var(--card); border-bottom: 1px solid var(--line); padding: 12px 16px;
+  }
+  .top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  h1 { font-size: 18px; margin: 0; }
+  .count { color: var(--muted); font-size: 13px; }
+  .controls { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+  .controls input[type=search] {
+    flex: 1 1 220px; padding-left: 36px;
+    background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%236b7686' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cline x1='16.5' y1='16.5' x2='21' y2='21'/%3E%3C/svg%3E") no-repeat 11px center;
+  }
+  input, select, textarea {
+    font: inherit; padding: 9px 11px; border: 1px solid var(--line);
+    border-radius: 8px; background: #fff; color: var(--text);
+  }
+  input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
+  button {
+    font: inherit; padding: 9px 14px; border-radius: 8px; border: 1px solid var(--line);
+    background: #fff; cursor: pointer; white-space: nowrap;
+  }
+  main { padding: 16px; max-width: 1200px; margin: 0 auto; }
+
+  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 10px; overflow: hidden; }
+  th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  th { background: #f9fafc; font-size: 13px; color: var(--muted); cursor: pointer; user-select: none; }
+  th .arrow { font-size: 11px; }
+  tr:hover td { background: #fafbfd; }
+  td.ship { font-weight: 600; }
+  td.note { color: #3a4352; line-height: 1.45; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 99px; background: var(--accent-soft); color: var(--accent); font-size: 12px; font-weight: 600; }
+  mark { background: var(--mark); padding: 0 1px; border-radius: 2px; }
+  .empty { text-align: center; color: var(--muted); padding: 40px 0; }
+
+  /* 모바일: 표를 카드로 */
+  @media (max-width: 720px) {
+    thead { display: none; }
+    table, tbody, tr, td { display: block; width: 100%; }
+    table { background: none; }
+    tr { background: var(--card); border: 1px solid var(--line); border-radius: 10px; margin-bottom: 10px; padding: 6px 4px; }
+    td { border: none; padding: 5px 12px; }
+    td[data-label]::before { content: attr(data-label); display: block; font-size: 11px; color: var(--muted); }
+    td.ship { font-size: 16px; }
+    td.ship::before { display: none !important; }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="sticky">
+<nav>
+  <a class="brand" href="https://rlatlqktp12345-ctrl.github.io/kaejamom/">TALLY</a>
+  
+</nav>
+<header>
+  <div class="top">
+    <h1>부산신항 · 북항</h1>
+    <span class="count" id="count"></span>
+  </div>
+  <div class="controls">
+    <input type="search" id="q" placeholder="선명 검색">
+    <select id="fTerminal"><option value="">전체 터미널</option></select>
+  </div>
+</header>
+</div>
+
+<main>
+  <table>
+    <thead>
+      <tr>
+        <th data-key="ship">선명 <span class="arrow"></span></th>
+        <th data-key="line">선사 <span class="arrow"></span></th>
+        <th data-key="terminal">터미널 <span class="arrow"></span></th>
+        <th data-key="note">이배 특징 <span class="arrow"></span></th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+</main>
+
+
+<script>
+
+const DATA = [
+    ['TS PUSAN','TSL','BIT','입항→작업시작 약 : 1시간 30분,TS LINE SEAL확인,BIG DAMAGE 多'],
+    ['COSCO SHIPPING CAMELLIA','COS','BNCT','입항→작업시작 약 : 2시간']
+];
+
+// ===== 아래는 건드리지 않아도 돼요 =====
+const records = DATA.map(([ship, line, terminal, note]) => ({ ship, line, terminal, note }));
+let sortKey = 'ship', sortAsc = true;
+
+const $ = s => document.querySelector(s);
+const tbody = $('#tbody'), q = $('#q'), fTerminal = $('#fTerminal');
+
+function esc(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function highlight(text, words) {
+  let html = esc(text);
+  words.forEach(w => {
+    if (!w) return;
+    const re = new RegExp('(' + esc(w).replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+    html = html.replace(re, '<mark>$1</mark>');
+  });
+  return html;
+}
+
+function refreshLists() {
+  const terminals = [...new Set(records.map(r => r.terminal))].sort();
+  const cur = fTerminal.value;
+  fTerminal.innerHTML = '<option value="">전체 터미널</option>' +
+    terminals.map(t => `<option ${t === cur ? 'selected' : ''}>${esc(t)}</option>`).join('');
+}
+
+function render() {
+  const words = q.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  const term = fTerminal.value;
+
+  let list = records.filter(r => {
+    if (term && r.terminal !== term) return false;
+    const hay = r.ship.toLowerCase();
+    return words.every(w => hay.includes(w));
+  });
+
+  list.sort((a, b) => {
+    const r = String(a[sortKey]).localeCompare(String(b[sortKey]), 'ko');
+    return sortAsc ? r : -r;
+  });
+
+  document.querySelectorAll('th[data-key]').forEach(th => {
+    th.querySelector('.arrow').textContent = th.dataset.key === sortKey ? (sortAsc ? '▲' : '▼') : '';
+  });
+
+  $('#count').textContent = `${list.length} / ${records.length}척`;
+
+  tbody.innerHTML = list.length ? list.map(r => `
+    <tr>
+      <td class="ship" data-label="선명">${highlight(r.ship, words)}</td>
+      <td data-label="선사"><span class="tag">${esc(r.line)}</span></td>
+      <td data-label="터미널">${esc(r.terminal)}</td>
+      <td class="note" data-label="이배 특징">${esc(r.note)}</td>
+    </tr>`).join('')
+    : '<tr><td colspan="4" class="empty">검색 결과가 없어요</td></tr>';
+}
+
+document.querySelectorAll('th[data-key]').forEach(th => {
+  th.onclick = () => {
+    if (sortKey === th.dataset.key) sortAsc = !sortAsc;
+    else { sortKey = th.dataset.key; sortAsc = true; }
+    render();
+  };
+});
+
+q.addEventListener('input', render);
+fTerminal.addEventListener('change', render);
+
+refreshLists();
+render();
+</script>
+</body>
+</html>
