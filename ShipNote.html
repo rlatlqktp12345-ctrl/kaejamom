@@ -103,7 +103,7 @@
         <th data-key="ship">선명 <span class="arrow"></span></th>
         <th data-key="line">선사 <span class="arrow"></span></th>
         <th data-key="terminal">터미널 <span class="arrow"></span></th>
-        <th data-key="note">이배 특징 <span class="arrow"></span></th>
+        <th data-key="note">특징 <span class="arrow"></span></th>
       </tr>
     </thead>
     <tbody id="tbody"></tbody>
@@ -118,7 +118,6 @@ const DATA = [
     ['COSCO SHIPPING CAMELLIA','COS','BNCT','입항→작업시작 약 : 2시간']
 ];
 
-// ===== 아래는 건드리지 않아도 돼요 =====
 const records = DATA.map(([ship, line, terminal, note]) => ({ ship, line, terminal, note }));
 let sortKey = 'ship', sortAsc = true;
 
@@ -171,7 +170,7 @@ function render() {
       <td class="ship" data-label="선명">${highlight(r.ship, words)}</td>
       <td data-label="선사"><span class="tag">${esc(r.line)}</span></td>
       <td data-label="터미널">${esc(r.terminal)}</td>
-      <td class="note" data-label="이배 특징">${esc(r.note)}</td>
+      <td class="note" data-label="특징">${esc(r.note)}</td>
     </tr>`).join('')
     : '<tr><td colspan="4" class="empty">검색 결과가 없어요</td></tr>';
 }
