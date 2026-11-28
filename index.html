@@ -53,6 +53,58 @@ h2 {
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
 
+    /* ===== 공지사항 (맨 위 한 칸, 줄 전체가 링크) ===== */
+    .notice-bar {
+      background: #fff8e6;
+      border-bottom: 2px solid #ffc107;
+    }
+
+    .notice-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+      color: #5c4400;
+      text-decoration: none;
+    }
+
+    .notice-link:hover,
+    .notice-link:focus-visible {
+      color: #3d2e00;
+    }
+
+    .notice-link:hover .notice-text,
+    .notice-link:focus-visible .notice-text {
+      text-decoration: underline;
+    }
+
+    .notice-label {
+      flex: 0 0 auto;
+      background: #ffc107;
+      color: #212529;
+      font-weight: bold;
+      font-size: 0.85rem;
+      border-radius: 6px;
+      padding: 2px 10px;
+    }
+
+    .notice-text {
+      flex: 1 1 0;
+      min-width: 0;
+      font-size: 0.95rem;
+      font-weight: 600;
+      line-height: 1.4;
+      word-break: keep-all;
+      overflow-wrap: anywhere;
+    }
+
+    .notice-arrow {
+      flex: 0 0 auto;
+      font-size: 1.3rem;
+      line-height: 1;
+      color: #b78900;
+    }
+
     .sinhang-section {
       position: relative;
       margin-top: -50px;
@@ -202,6 +254,17 @@ h2 {
   </div>
 </nav>
 
+<!-- 공지사항: 글(notice-text)과 주소(href)만 고치면 됩니다. 공지를 없애려면 이 <div class="notice-bar"> 전체를 지우세요 -->
+<div class="notice-bar" role="note">
+  <div class="container">
+    <a class="notice-link" href="https://hyccledu.com/" target="_blank" rel="noopener noreferrer">
+      <span class="notice-label">📢 공지</span>
+      <span class="notice-text">12.1~12.30 하반기교육</span>
+      <span class="notice-arrow" aria-hidden="true">›</span>
+    </a>
+  </div>
+</div>
+
 <section class="hero">
   <div class="container">
   <h1 style="color: white; display: flex; justify-content: center; gap: 30px;">
@@ -225,6 +288,7 @@ h2 {
         <li><a class="dropdown-item" href="http://www.hyccl.com/bbs/board.php?bo_table=notice" target="_blank">공지 사항</a></li>
         <li><a class="dropdown-item" href="http://www.hyccl.com/bbs/board.php?bo_table=member" target="_blank">직원 현황</a></li>
         <li><a class="dropdown-item" href="http://www.hyccl.com/tally/" target="_blank">컨 조회</a></li>
+	<li><a class="dropdown-item" href="https://hyccledu.com/" target="_blank">해양 에듀</a></li>
       </ul>
     </div>
   </div>
@@ -589,6 +653,22 @@ h2 {
               rel="noopener noreferrer"
             >
               부산항도선사회
+            </a>
+          </div>
+        </div>
+      </div>
+
+<div class="col-md-4">
+        <div class="card h-100 terminal-card">
+          <div class="card-body">
+            <h5 class="card-title">ShipNote</h5>
+            <a
+              class="btn btn-primary"
+              href="http://www.busanpilot.co.kr/boards/lists/weather"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              ShipNote
             </a>
           </div>
         </div>
